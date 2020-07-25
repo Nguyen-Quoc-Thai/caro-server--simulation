@@ -1,0 +1,57 @@
+{
+  "gameStart": [
+    {
+      "API_KEY": "123456",
+      "matrix": 9,
+      "gameId": 1
+    },
+    {
+      "API_KEY": "234567",
+      "matrix": 9,
+      "gameId": 1
+    },
+    {
+      "API_KEY": "123456",
+      "matrix": 9,
+      "gameId": 1
+    }
+  ],
+  "positionSend": [
+    {
+      "API_KEY": "123456",
+      "player": 1,
+      "gameid": 1,
+      "matrix": []
+    },
+    {
+      "API_KEY": "123456",
+      "player": 2,
+      "gameid": 1,
+      "matrix": []
+    },
+    {
+      "API_KEY": "234567",
+      "player": 1,
+      "gameid": 1,
+      "matrix": []
+    },
+    {
+      "API_KEY": "234567",
+      "player": 2,
+      "gameid": 1,
+      "matrix": []
+    },
+    {
+      "API_KEY": "345678",
+      "player": 1,
+      "gameid": 1,
+      "matrix": []
+    },
+    {
+      "API_KEY": "345678",
+      "player": 2,
+      "gameid": 1,
+      "matrix": []
+    }
+  ]
+}
