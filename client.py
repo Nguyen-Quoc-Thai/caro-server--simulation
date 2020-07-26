@@ -1,9 +1,8 @@
 # pip install requests
 import requests
-import json
 
 # const req url
-api_url = 'http://localhost:8080/send'
+api_url = 'http://localhost:8080/caro/send'
 
 # newgame
 new_game_data = {
@@ -16,8 +15,8 @@ new_game_data = {
 send_position_data = {
 	"API_KEY": "123456",
 	"action": "sendposition",
-	"position": "x4",
-	"player": 2
+	"position": "x7",
+	"player": 1
 }
 
 # getposition
@@ -28,11 +27,11 @@ get_position_data = {
 }
 
 # make request
-data = requests.post(api_url, json = new_game_data)
-
-# String data
-print (f'\nString data: {data.text}')
+res = requests.post(api_url, json = get_position_data)
 
 # parse data
-# result = json.loads(data)
-# print (f'\nData: {result}')
+data = res.json()
+print (f'\nData: {data}')
+
+# access field via keys
+# print (f'\nStatus: {data["status"]}')

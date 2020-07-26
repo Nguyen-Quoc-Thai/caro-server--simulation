@@ -2,18 +2,18 @@
   "gameStart": [
     {
       "API_KEY": "123456",
-      "matrix": 9,
-      "gameId": 1
+      "matrix": 0,
+      "gameid": 1
     },
     {
       "API_KEY": "234567",
-      "matrix": 9,
-      "gameId": 1
+      "matrix": 0,
+      "gameid": 1
     },
     {
-      "API_KEY": "123456",
-      "matrix": 9,
-      "gameId": 1
+      "API_KEY": "345678",
+      "matrix": 0,
+      "gameid": 1
     }
   ],
   "positionSend": [

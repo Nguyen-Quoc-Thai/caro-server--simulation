@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
 
 // Route
-app.post('/send', (req, res) => {
+app.post('/caro/send', (req, res) => {
 
     const {action} = req.body
 
@@ -45,12 +45,12 @@ app.post('/send', (req, res) => {
                         db.set("gameStart", newData).write()
 
                         if(data)
-                            return res.send({status: "successfully", gameid: data.gameId})
+                            return res.json({status: "successfully", gameid: data.gameid})
 
                     } catch (error) {
 
                         console.log("Server error: " + error.message)
-                        return res.send("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
+                        return res.json("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
                     }
                 }
 
@@ -69,7 +69,7 @@ app.post('/send', (req, res) => {
                         const  data = db.get("positionSend").find(game => (game.API_KEY === API_KEY && game.player === player)).value()
                         const index = db.get("positionSend").value().indexOf(data)
 
-                        const  gameId = db.get("gameStart").find(game => game.API_KEY === API_KEY).value().gameId
+                        const  gameId = db.get("gameStart").find(game => game.API_KEY === API_KEY).value().gameid
 
                         data.player = player
                         data.matrix.push(position)
@@ -81,11 +81,12 @@ app.post('/send', (req, res) => {
                         const  matrixUser = db.get("positionSend").find(game => (game.API_KEY === API_KEY && game.player === player)).value().matrix
 
                         if(data)
-                            return res.send({status: "successfully", gameid: gameId, matrix: matrixUser})
+                            return res.json({status: "successfully", gameid: gameId, matrix: matrixUser})
+
                     } catch (error) {
 
                         console.log("Server error: " + error.message)
-                        return res.send("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
+                        return res.json("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
                     }
                 }
 
@@ -102,13 +103,25 @@ app.post('/send', (req, res) => {
                     try {
 
                         const  data = db.get("positionSend").value().filter(game => game.API_KEY === API_KEY && game.gameid === gameid)
+                        const  size = db.get("gameStart").find(game => game.API_KEY === API_KEY && game.gameid === gameid).value().matrix
+
+                        let boardGame = Array(size).fill(0)
+
+                        data[0].matrix.forEach(element => {
+                            boardGame[(+ element.substr(1)) - 1] = 1
+                        });
+
+                        data[1].matrix.forEach(element => {
+                            boardGame[(+ element.substr(1)) - 1] = 2
+                        });
 
                         if(data)
-                            return res.send({status: "successfully", gameid: gameid, matrix: [...data[0].matrix, ...data[1].matrix]})
+                            return res.json({status: "successfully", gameid: gameid, matrix: [boardGame.join('')]})
+
                     } catch (error) {
 
                         console.log("Server error: " + error.message)
-                        return res.send("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
+                        return res.json("\nRequest failed: Please checking your request data (┬┬﹏┬┬)")
                     }
                 }
 
@@ -116,7 +129,7 @@ app.post('/send', (req, res) => {
             }
         }
 
-    return res.send({})
+    return res.json({})
 })
 
 
